@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>To Do list</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        *{
+            margin: 0;
+           padding: 0;
+        }
+
+        .card{
+            margin: 10px;
+            
+        }
+        .text{
+            background: url("https://rpsthecoder.github.io/img-repo/Taitō%20by%20Jezael%20Melgoza.jpg") center;
+            background-clip: text;
+            -webkit-background-clip:        text;
+            color: transparent;
+            font:                           bolder 2vw 'Alfa Slab One';
+        }
+        button{
+            border: 0;
+            background-color: transparent;
+        }
+        button:hover{
+            cursor:grab;
+            z-index: 1;
+            box-shadow: 5px 5px rgba(0,0,0,0.1);
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(45deg, #ea4f4c 0%, #6d0019 100%);
+            height: 100%;
+            min-height:100vh ;
+            scroll-behavior: smooth;
+        }
+        .form-inline button{
+            margin-left: 20px;
+            font-weight: 1000;
+            border-radius: 10%;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.1);
+        }
+        .card:hover{
+            z-index:2;
+            transform: translateX(-5px);
+            box-shadow: 5px 5px rgba(0,0,0,0.5);
+            
+        }
+        nav{
+            /*background: linear-gradient(45deg, #ea4f4c 0%, #6d0019 100%);*/
+            background-color: transparent;
+            background-blend-mode:normal;
+            background-color: aliceblue;
+            
+        }
+    </style>
+</head>
+<body class="container" style="padding: 10%;">
+        <div style="display: flex; justify-content: center;">
+        <form method="POST" class="form-inline" >
+            {%csrf_token%}
+            <div class="form-group">
+              <input type="text" name="work" class="form-control" id="a" placeholder="Task">
+            </div>
+
+            <button type="submit"> ADD </button>    
+        </form>
+        </div>
+        {% for i in tasks%}
+        <div class="card" style=" flex-direction: column-reverse; display: flex;" >
+            <div class="card-body" style="display: flex;">
+                <p class="text">{{i.work}}</p>
+                <span style="flex: 1 1 auto"></span>
+                <form action="deleteTask/{{i.id}}/" method = "post">{% csrf_token %}
+                    <button type="submit" ><i class="fa fa-times"></i></button>
+                </form>  
+            </div>
+          </div>
+        {%endfor%}
+        <div class=" fixed-bottom " style="display: flex; flex-direction: row; justify-content: center;">
+            
+            <p><i class="fa fa-copyright"></i>Developed and Designed by Tushar Mohan</p>
+            
+        </div>
+        
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
